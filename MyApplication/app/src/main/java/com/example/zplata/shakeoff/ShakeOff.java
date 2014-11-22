@@ -16,11 +16,12 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Random;
 
 
-public class ShakeOff extends Activity implements SensorEventListener {
+public class ShakeOff extends Activity {
 
     private TextView centerCount;
     private RelativeLayout rLayout;
@@ -28,9 +29,9 @@ public class ShakeOff extends Activity implements SensorEventListener {
     private Sensor mAccel;
     private Random random;
 
-    private long lastUpdate;
+    private ShakeEventManager mShake;
 
-    private static final int SHAKE_THRESHOLD = 800;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,56 +39,41 @@ public class ShakeOff extends Activity implements SensorEventListener {
         setContentView(R.layout.activity_shake_off);
 
         // Vars
-        lastUpdate = (long) 0.0;
-        sensorMgr = (SensorManager) getSystemService(SENSOR_SERVICE);
         centerCount = (TextView) findViewById(R.id.centerCount);
-        mAccel = sensorMgr.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         rLayout = (RelativeLayout) findViewById(R.id.rLayout);
         rLayout.setOnClickListener(rLayoutClickListener);
-        random = new Random();
-    
 
+        random = new Random();
+
+
+        sensorMgr = (SensorManager) getSystemService(SENSOR_SERVICE);
+        mAccel = sensorMgr.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        mShake = new ShakeEventManager();
+        mShake.setOnShakeListener(new ShakeEventManager.OnShakeListener() {
+            @Override
+            public void onShake(int count) {
+                handleShakeEvent(count);
+            }
+
+            public void handleShakeEvent(int count) {
+                centerCount.setText(count + "");
+            }
+        });
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        sensorMgr.registerListener(this, mAccel, SensorManager.SENSOR_DELAY_GAME);
+        sensorMgr.registerListener(mShake, mAccel, SensorManager.SENSOR_DELAY_UI);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        sensorMgr.unregisterListener(this);
+        sensorMgr.unregisterListener(mShake);
     }
 
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
-    }
-
-    @Override
-    public void onSensorChanged(SensorEvent event) {
-        if(event.sensor.getType() ==  Sensor.TYPE_ACCELEROMETER) {
-            long curTime = System.currentTimeMillis();
-            if((curTime - lastUpdate) > 100) {
-                long diffTime = (curTime - lastUpdate);
-                lastUpdate = curTime;
-
-                float value[] = event.values;
-                float x = value[0];
-                float y = value[1];
-                float z = value[2];
-
-                // use of gravity
-                float asr = (x*x + y*y + z*z) / (SensorManager.GRAVITY_EARTH * SensorManager.GRAVITY_EARTH);
-                if(asr >= 2) {
-                    Random r = new Random();
-                    int i = r.nextInt(10);
-                }
-            }
-        }
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
