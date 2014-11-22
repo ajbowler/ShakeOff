@@ -25,12 +25,17 @@ public class ShakeOff extends Activity implements SensorEventListener {
     private SensorManager sensorMgr;
     private Sensor mAccel;
 
+    private long lastUpdate;
+
+    private static final int SHAKE_THRESHOLD = 800;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shake_off);
 
         // Vars
+        lastUpdate = (long) 0.0;
         sensorMgr = (SensorManager) getSystemService(SENSOR_SERVICE);
         centerCount = (TextView) findViewById(R.id.centerCount);
         mAccel = sensorMgr.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -38,7 +43,7 @@ public class ShakeOff extends Activity implements SensorEventListener {
 
         rLayout.setOnClickListener(rLayoutClickListener);
 
-
+    
 
     }
 
@@ -49,6 +54,12 @@ public class ShakeOff extends Activity implements SensorEventListener {
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        sensorMgr.unregisterListener(this);
+    }
+
+    @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
     }
@@ -56,16 +67,22 @@ public class ShakeOff extends Activity implements SensorEventListener {
     @Override
     public void onSensorChanged(SensorEvent event) {
         if(event.sensor.getType() ==  Sensor.TYPE_ACCELEROMETER) {
-            float value[] = event.values;
-            float x = value[0];
-            float y = value[1];
-            float z = value[2];
+            long curTime = System.currentTimeMillis();
+            if((curTime - lastUpdate) > 100) {
+                long diffTime = (curTime - lastUpdate);
+                lastUpdate = curTime;
 
-            // use of gravity
-            float asr = (x*x + y*y + z*z) / (SensorManager.GRAVITY_EARTH * SensorManager.GRAVITY_EARTH);
-            if(asr >= 2) {
-                Random r = new Random();
-                int i = r.nextInt(10);
+                float value[] = event.values;
+                float x = value[0];
+                float y = value[1];
+                float z = value[2];
+
+                // use of gravity
+                float asr = (x*x + y*y + z*z) / (SensorManager.GRAVITY_EARTH * SensorManager.GRAVITY_EARTH);
+                if(asr >= 2) {
+                    Random r = new Random();
+                    int i = r.nextInt(10);
+                }
             }
         }
     }
