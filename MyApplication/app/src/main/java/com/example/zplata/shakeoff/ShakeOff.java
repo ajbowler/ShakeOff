@@ -17,6 +17,8 @@ import android.hardware.SensorManager;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.util.Random;
+
 
 public class ShakeOff extends Activity implements SensorEventListener {
 
@@ -24,6 +26,7 @@ public class ShakeOff extends Activity implements SensorEventListener {
     private RelativeLayout rLayout;
     private SensorManager sensorMgr;
     private Sensor mAccel;
+    private Random random;
 
     private long lastUpdate;
 
@@ -40,9 +43,8 @@ public class ShakeOff extends Activity implements SensorEventListener {
         centerCount = (TextView) findViewById(R.id.centerCount);
         mAccel = sensorMgr.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         rLayout = (RelativeLayout) findViewById(R.id.rLayout);
-
         rLayout.setOnClickListener(rLayoutClickListener);
-
+        random = new Random();
     
 
     }
@@ -111,7 +113,7 @@ public class ShakeOff extends Activity implements SensorEventListener {
 
     private OnClickListener rLayoutClickListener = new OnClickListener() {
         public void onClick(View v) {
-            v.setBackgroundColor(Color.GREEN);
+            v.setBackgroundColor(random.nextInt());
         }
     };
 }
