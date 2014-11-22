@@ -27,11 +27,10 @@ public class ShakeOff extends Activity {
     private RelativeLayout rLayout;
     private SensorManager sensorMgr;
     private Sensor mAccel;
-<<<<<<< Updated upstream
     private Random random;
-=======
+
     private ShakeEventManager mShake;
->>>>>>> Stashed changes
+
 
 
     @Override
@@ -43,10 +42,9 @@ public class ShakeOff extends Activity {
         centerCount = (TextView) findViewById(R.id.centerCount);
         rLayout = (RelativeLayout) findViewById(R.id.rLayout);
         rLayout.setOnClickListener(rLayoutClickListener);
-<<<<<<< Updated upstream
+
         random = new Random();
-    
-=======
+
 
         sensorMgr = (SensorManager) getSystemService(SENSOR_SERVICE);
         mAccel = sensorMgr.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -56,7 +54,6 @@ public class ShakeOff extends Activity {
             public void onShake(int count) {
                 handleShakeEvent(count);
             }
->>>>>>> Stashed changes
 
             public void handleShakeEvent(int count) {
                 centerCount.setText(count + "");
