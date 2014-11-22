@@ -14,6 +14,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +29,9 @@ public class ShakeOff extends Activity {
     private SensorManager sensorMgr;
     private Sensor mAccel;
     private Random random;
+    private ProgressBar levelProgressBar;
+    private int currentProgress;
+    private int maxProgress;
 
     private ShakeEventManager mShake;
 
@@ -51,11 +55,11 @@ public class ShakeOff extends Activity {
         mShake = new ShakeEventManager();
         mShake.setOnShakeListener(new ShakeEventManager.OnShakeListener() {
             @Override
-            public void onShake(int count) {
-                handleShakeEvent(count);
+            public void onShake(int count, int currentProgress) {
+                handleShakeEvent(count, currentProgress);
             }
 
-            public void handleShakeEvent(int count) {
+            public void handleShakeEvent(int count, int currentProgress) {
                 centerCount.setText(count + "");
             }
         });
