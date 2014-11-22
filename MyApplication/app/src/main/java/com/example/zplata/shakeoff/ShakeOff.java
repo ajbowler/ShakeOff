@@ -18,6 +18,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.media.MediaPlayer;
 
 import java.util.Random;
 
@@ -33,6 +34,8 @@ public class ShakeOff extends Activity {
     private int currentProgress;
     private int maxProgress;
 
+    private MediaPlayer mp;
+
     private ShakeEventManager mShake;
 
 
@@ -47,6 +50,9 @@ public class ShakeOff extends Activity {
         rLayout = (RelativeLayout) findViewById(R.id.rLayout);
         rLayout.setOnClickListener(rLayoutClickListener);
 
+        mp = MediaPlayer.create(getApplicationContext(), R.raw.tswift);
+        mp.start();
+        mp.setLooping(true);
         random = new Random();
 
 
@@ -68,12 +74,14 @@ public class ShakeOff extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
+        mp.start();
         sensorMgr.registerListener(mShake, mAccel, SensorManager.SENSOR_DELAY_UI);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+        mp.pause();
         sensorMgr.unregisterListener(mShake);
     }
 
