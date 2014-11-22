@@ -31,6 +31,10 @@ public class ShakeOff extends Activity {
 
     private ShakeEventManager mShake;
 
+    public int shakes = 0; // like "count" but for in a global scope
+    public int totalShakes = 0;
+    public int level = 1;
+    public int levelRequirement = 5;
 
 
     @Override
@@ -54,12 +58,23 @@ public class ShakeOff extends Activity {
             public void onShake(int count) {
                 handleShakeEvent(count);
             }
-
-            public void handleShakeEvent(int count) {
-                centerCount.setText(count + "");
-            }
+            public void handleShakeEvent(int count) { totalShakes = count; shake(); }
         });
     }
+
+
+    public void shake() {
+        shakes++;
+        centerCount.setText(shakes + "");
+        if(shakes >= level * levelRequirement) {
+            shakes = 0;
+            level++;
+
+        }
+
+    }
+
+
 
     @Override
     protected void onResume() {
