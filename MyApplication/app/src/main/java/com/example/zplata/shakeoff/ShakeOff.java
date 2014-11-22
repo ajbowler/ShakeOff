@@ -5,20 +5,39 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.app.Activity;
 import java.util.Random;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.widget.TextView;
 
 
-public class ShakeOff extends ActionBarActivity implements SensorEventListener {
+public class ShakeOff extends Activity implements SensorEventListener {
+
+    private TextView centerCount;
+    private SensorManager sensorMgr;
+    private Sensor mAccel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shake_off);
 
+        // Vars
+        sensorMgr = (SensorManager) getSystemService(SENSOR_SERVICE);
+        centerCount = (TextView) findViewById(R.id.centerCount);
+        mAccel = sensorMgr.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sensorMgr.registerListener(this, mAccel, SensorManager.SENSOR_DELAY_GAME);
     }
 
     @Override
@@ -35,6 +54,11 @@ public class ShakeOff extends ActionBarActivity implements SensorEventListener {
             float z = value[2];
 
             // use of gravity
+            float asr = (x*x + y*y + z*z) / (SensorManager.GRAVITY_EARTH * SensorManager.GRAVITY_EARTH);
+            if(asr >= 2) {
+                Random r = new Random();
+                int i = r.nextInt(10);
+            }
         }
     }
 
