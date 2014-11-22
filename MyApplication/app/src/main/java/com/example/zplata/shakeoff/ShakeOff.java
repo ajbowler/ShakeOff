@@ -1,22 +1,27 @@
 package com.example.zplata.shakeoff;
 
+import android.graphics.Color;
 import android.hardware.SensorEventListener;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
 import android.view.MenuItem;
+import android.view.View.OnClickListener;
 import android.app.Activity;
 import java.util.Random;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
 public class ShakeOff extends Activity implements SensorEventListener {
 
     private TextView centerCount;
+    private RelativeLayout rLayout;
     private SensorManager sensorMgr;
     private Sensor mAccel;
 
@@ -29,6 +34,9 @@ public class ShakeOff extends Activity implements SensorEventListener {
         sensorMgr = (SensorManager) getSystemService(SENSOR_SERVICE);
         centerCount = (TextView) findViewById(R.id.centerCount);
         mAccel = sensorMgr.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        rLayout = (RelativeLayout) findViewById(R.id.rLayout);
+
+        rLayout.setOnClickListener(rLayoutClickListener);
 
 
 
@@ -83,4 +91,10 @@ public class ShakeOff extends Activity implements SensorEventListener {
 
         return super.onOptionsItemSelected(item);
     }
+
+    private OnClickListener rLayoutClickListener = new OnClickListener() {
+        public void onClick(View v) {
+            v.setBackgroundColor(Color.GREEN);
+        }
+    };
 }
