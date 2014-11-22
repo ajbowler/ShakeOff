@@ -1,19 +1,42 @@
 package com.example.zplata.shakeoff;
 
+import android.hardware.SensorEventListener;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import java.util.Random;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 
 
-public class ShakeOff extends ActionBarActivity {
+public class ShakeOff extends ActionBarActivity implements SensorEventListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shake_off);
+
     }
 
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        if(event.sensor.getType() ==  Sensor.TYPE_ACCELEROMETER) {
+            float value[] = event.values;
+            float x = value[0];
+            float y = value[1];
+            float z = value[2];
+
+            // use of gravity
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
