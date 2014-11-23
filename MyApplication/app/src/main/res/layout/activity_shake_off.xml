@@ -27,8 +27,8 @@
         android:id="@+id/progressBar"
         android:indeterminate="false"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:progressDrawable="@drawable/circular_progress_bar"/>
+        android:layout_centerHorizontal="true"/>
+        <!---->android:progressDrawable="@drawable/circular_progress_bar"/>
 
     <TextView
         android:layout_width="wrap_content"
