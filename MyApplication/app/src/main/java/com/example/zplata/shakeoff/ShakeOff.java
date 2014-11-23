@@ -1,12 +1,8 @@
 package com.example.zplata.shakeoff;
 
 import android.annotation.TargetApi;
-import android.graphics.Color;
-import android.hardware.SensorEventListener;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.util.TypedValue;
+
 import android.view.Menu;
 import android.view.View;
 import android.view.MenuItem;
@@ -109,11 +105,10 @@ public class ShakeOff extends Activity {
 
                     if(tempShakes >= kShakes) {
                         centerCount.setText("LEVEL UP");
+                        centerCount.setTextSize(80);
                         centerCount.setVisibility(View.VISIBLE);
                         level++;
                         levelCount.setText("Level " + level);
-                        mp = MediaPlayer.create(getApplicationContext(), R.raw.poke);
-                        mp.start();
                         levelProgressBar.setVisibility(View.VISIBLE);
                     }
                     else {
