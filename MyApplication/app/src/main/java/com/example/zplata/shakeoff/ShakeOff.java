@@ -199,6 +199,7 @@ public class ShakeOff extends Activity {
             if(shakes >= level * levelRequirement) {
                 shakes = 0;
                 centerCount.setTextSize(80);
+                centerCount.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 centerCount.setText("LEVEL UP"); //TODO make a different text for this
                 level++;
                 levelCount.setText("Level " + level);
