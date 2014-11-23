@@ -205,8 +205,7 @@ public class ShakeOff extends Activity {
                 centerCount.setText("LEVEL UP"); //TODO make a different text for this
                 level++;
                 levelCount.setText("Level " + level);
-                mp = MediaPlayer.create(getApplicationContext(), R.raw.poke);
-                mp.start();
+                
                 updateProgressBar();
             }
         }

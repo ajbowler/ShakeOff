@@ -18,7 +18,8 @@
         android:id="@+id/centerCount"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:textSize="100pt" />
+        android:textSize="100pt"
+        android:gravity="center" />
 
     <ProgressBar
         android:id="@+id/progressBar"
