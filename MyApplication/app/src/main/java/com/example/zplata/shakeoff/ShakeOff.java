@@ -28,6 +28,7 @@ public class ShakeOff extends Activity {
     private TextView centerCount;
     private TextView levelCount;
     private TextView totalCount;
+    private TextView hiddenBossMsg;
     private RelativeLayout rLayout;
     private SensorManager sensorMgr;
     private Sensor mAccel;
@@ -45,6 +46,8 @@ public class ShakeOff extends Activity {
     public int level = 1;
     public int levelRequirement = 5;
 
+    //Boss Values
+    private int tempShakes = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +58,8 @@ public class ShakeOff extends Activity {
         centerCount = (TextView) findViewById(R.id.centerCount);
         levelCount = (TextView) findViewById(R.id.levelCount);
         totalCount = (TextView) findViewById(R.id.totalCount);
+        hiddenBossMsg = (TextView) findViewById(R.id.hiddenBossMsg);
+        hiddenBossMsg.setVisibility(View.GONE);
         rLayout = (RelativeLayout) findViewById(R.id.rLayout);
         rLayout.setOnClickListener(rLayoutClickListener);
         levelProgressBar = (ProgressBar) findViewById(R.id.progressBar);
@@ -78,7 +83,12 @@ public class ShakeOff extends Activity {
             }
 
             public void handleShakeEvent() {
-                shake();
+                if(level % 5 == 0 && level != 0){
+                    bossShake();
+                }
+                else{
+                    shake();
+                }
             }
 
         });
@@ -98,7 +108,24 @@ public class ShakeOff extends Activity {
             levelCount.setText("Level " + level);
             //updateProgressBar();
         }
+    }
 
+    private void bossShake () {
+        centerCount.setVisibility(View.GONE);
+        hiddenBossMsg.setText("ShakeOff w/ Nicholas!");
+        //hiddenBossMsg.setVisibility(View.VISIBLE);
+        tempShakes++;
+        totalShakes++;
+        totalCount.setText("Total " + totalShakes);
+        int kShakes = level * levelRequirement + 3;
+        if(tempShakes == kShakes) {
+            tempShakes = 0;
+            centerCount.setText("LEVEL UP");
+            centerCount.setVisibility(View.VISIBLE);
+            level++;
+            levelCount.setText("Level " + level);
+            hiddenBossMsg.setVisibility(View.GONE);
+        }
     }
 
     private void updateProgressBar() {
