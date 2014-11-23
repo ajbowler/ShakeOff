@@ -64,7 +64,7 @@ public class ShakeOff extends Activity {
         mp.setLooping(true);
         random = new Random();
 
-        levelProgressBar.setProgress(0);
+        levelProgressBar.setProgress(4);
         levelProgressBar.setMax(level * levelRequirement);
 
 
@@ -88,7 +88,7 @@ public class ShakeOff extends Activity {
     public void shake() {
         shakes++;
         totalShakes++;
-        levelProgressBar.incrementProgressBy(1);
+        //levelProgressBar.incrementProgressBy(1);
         totalCount.setText("Total " + totalShakes);
         centerCount.setText(shakes + "");
         if(shakes >= level * levelRequirement) {
@@ -96,7 +96,7 @@ public class ShakeOff extends Activity {
             centerCount.setText("LEVEL UP"); //TODO make a different text for this
             level++;
             levelCount.setText("Level " + level);
-            updateProgressBar();
+            //updateProgressBar();
         }
 
     }
