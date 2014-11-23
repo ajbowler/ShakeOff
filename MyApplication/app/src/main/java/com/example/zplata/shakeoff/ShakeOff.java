@@ -184,6 +184,7 @@ public class ShakeOff extends Activity {
 
         if(level % 5 == 0 && level != 0 && !bossFight) {
             bossFight = true;
+            levelCount.setText("ShakeOff!!!");
             bossShake();
         }
 
