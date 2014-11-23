@@ -105,7 +105,7 @@ public class ShakeOff extends Activity {
                 image++;
                 image%=4;
 
-                if(bossTime >= maxTime) {
+                if(bossTime >= maxTime || tempShakes >= kShakes) {
 
                     if(tempShakes >= kShakes) {
                         centerCount.setText("LEVEL UP");
@@ -186,11 +186,19 @@ public class ShakeOff extends Activity {
             bossShake();
         }
 
+        centerCount.setTextSize(222); // TODO use one of these maybe not both?
+        centerCount.setText(shakes + "");
+
         if(!bossFight) { // because shakes is for leveling
             shakes++;
+
+            centerCount.setTextSize(222); // TODO use one of these maybe not both?
+            centerCount.setText(shakes + "");
+
             levelProgressBar.incrementProgressBy(1);
             if(shakes >= level * levelRequirement) {
                 shakes = 0;
+                centerCount.setTextSize(80);
                 centerCount.setText("LEVEL UP"); //TODO make a different text for this
                 level++;
                 levelCount.setText("Level " + level);
@@ -202,8 +210,6 @@ public class ShakeOff extends Activity {
         }
         totalShakes++;
         totalCount.setText("Total " + totalShakes);
-        centerCount.setTextSize(222);
-        centerCount.setText(shakes + "");
 
     }
 
