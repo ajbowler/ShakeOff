@@ -5,6 +5,7 @@ import android.hardware.SensorEventListener;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.View;
 import android.view.MenuItem;
@@ -170,10 +171,12 @@ public class ShakeOff extends Activity {
         totalShakes++;
         levelProgressBar.incrementProgressBy(1);
         totalCount.setText("Total " + totalShakes);
+        centerCount.setTextSize(222);
         centerCount.setText(shakes + "");
         if(shakes >= level * levelRequirement) {
             shakes = 0;
-            centerCount.setText("LEVEL UP"); //TODO make a different text for this
+            centerCount.setTextSize(80);
+            centerCount.setText("LEVEL UP");
             level++;
             levelCount.setText("Level " + level);
             updateProgressBar();
@@ -182,6 +185,7 @@ public class ShakeOff extends Activity {
 
     private void bossShake () {
         centerCount.setVisibility(View.GONE);
+        levelProgressBar.setVisibility(View.GONE);
 
         hiddenBossMsg.setText("ShakeOff w/ Nicholas!");
         hiddenBossMsg.setVisibility(View.VISIBLE);
@@ -191,11 +195,13 @@ public class ShakeOff extends Activity {
         int kShakes = level * levelRequirement;
         if(tempShakes >= kShakes) {
             tempShakes = 0;
+            centerCount.setTextSize(80);
             centerCount.setText("LEVEL UP");
             centerCount.setVisibility(View.VISIBLE);
             level++;
             levelCount.setText("Level " + level);
             hiddenBossMsg.setVisibility(View.GONE);
+            levelProgressBar.setVisibility(View.VISIBLE);
         }
         else{
             boolean venmoInstalled = VenmoLibrary.isVenmoInstalled(this);
