@@ -197,13 +197,13 @@ public class ShakeOff extends Activity {
             levelCount.setText("Level " + level);
             hiddenBossMsg.setVisibility(View.GONE);
         }
-        else{
+        /*else{
             boolean venmoInstalled = VenmoLibrary.isVenmoInstalled(this);
             if(venmoInstalled){
                Intent venmoIntent = VenmoLibrary.openVenmoPayment(auth, "ShakeOff", "145434160922624933", amt, "Test", "charge");
                startActivityForResult(venmoIntent, 1);
             }
-        }
+        }*/
     }
 
     private void updateProgressBar() {
