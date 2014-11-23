@@ -57,11 +57,15 @@ public class ShakeOff extends Activity {
         totalCount = (TextView) findViewById(R.id.totalCount);
         rLayout = (RelativeLayout) findViewById(R.id.rLayout);
         rLayout.setOnClickListener(rLayoutClickListener);
+        levelProgressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         mp = MediaPlayer.create(getApplicationContext(), R.raw.tswift);
         mp.start();
         mp.setLooping(true);
         random = new Random();
+
+        levelProgressBar.setProgress(0);
+        levelProgressBar.setMax(level * levelRequirement);
 
 
         sensorMgr = (SensorManager) getSystemService(SENSOR_SERVICE);
@@ -69,13 +73,11 @@ public class ShakeOff extends Activity {
         mShake = new ShakeEventManager();
         mShake.setOnShakeListener(new ShakeEventManager.OnShakeListener() {
             @Override
-            public void onShake(int count, int currentProgress) {
-                handleShakeEvent(count, currentProgress);
+            public void onShake() {
+                handleShakeEvent();
             }
 
-            //public void handleShakeEvent(int count) { // I forget what was here but i dont think we need it
-
-            public void handleShakeEvent(int count, int currentProgress) {
+            public void handleShakeEvent() {
                 shake();
             }
 
@@ -86,6 +88,7 @@ public class ShakeOff extends Activity {
     public void shake() {
         shakes++;
         totalShakes++;
+        levelProgressBar.incrementProgressBy(1);
         totalCount.setText("Total " + totalShakes);
         centerCount.setText(shakes + "");
         if(shakes >= level * levelRequirement) {
@@ -93,10 +96,15 @@ public class ShakeOff extends Activity {
             centerCount.setText("LEVEL UP"); //TODO make a different text for this
             level++;
             levelCount.setText("Level " + level);
+            updateProgressBar();
         }
 
     }
 
+    private void updateProgressBar() {
+        levelProgressBar.setProgress(0);
+        levelProgressBar.setMax(level * levelRequirement);
+    }
 
 
     @Override

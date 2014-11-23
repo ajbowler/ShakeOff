@@ -18,7 +18,6 @@ public class ShakeEventManager implements SensorEventListener {
     private OnShakeListener mListener;
     private long mShakeTimestamp;
     private int mShakeCount;
-    private int currentProgress;
 
 
     public void setOnShakeListener(OnShakeListener listener) {
