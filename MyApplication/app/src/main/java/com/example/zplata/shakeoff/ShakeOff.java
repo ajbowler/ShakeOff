@@ -60,7 +60,6 @@ public class ShakeOff extends Activity {
         levelCount = (TextView) findViewById(R.id.levelCount);
         totalCount = (TextView) findViewById(R.id.totalCount);
         hiddenBossMsg = (TextView) findViewById(R.id.hiddenBossMsg);
-        hiddenBossMsg.setVisibility(View.GONE);
         rLayout = (RelativeLayout) findViewById(R.id.rLayout);
         rLayout.setOnClickListener(rLayoutClickListener);
         levelProgressBar = (ProgressBar) findViewById(R.id.progressBar);
@@ -112,6 +111,7 @@ public class ShakeOff extends Activity {
     }
 
     private void bossShake () {
+        Toast.makeText(this, "I CANT EVEN.", Toast.LENGTH_SHORT);
         centerCount.setVisibility(View.GONE);
         hiddenBossMsg.setText("ShakeOff w/ Nicholas!");
         //hiddenBossMsg.setVisibility(View.VISIBLE);
