@@ -111,7 +111,7 @@ public class ShakeOff extends Activity {
     }
 
     private void bossShake () {
-        Toast.makeText(this, "I CANT EVEN.", Toast.LENGTH_SHORT);
+        Toast.makeText(this, "I CANT EVEN.", Toast.LENGTH_SHORT).show();
         centerCount.setVisibility(View.GONE);
         hiddenBossMsg.setText("ShakeOff w/ Nicholas!");
         //hiddenBossMsg.setVisibility(View.VISIBLE);
