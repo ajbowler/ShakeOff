@@ -37,6 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="18pt"
         android:text="Level 1"
         android:id="@+id/levelCount"
         android:layout_alignParentTop="true"
@@ -48,25 +49,59 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Total shakes"
         android:id="@+id/totalCount"
+        android:textSize="9pt"
         android:layout_below="@+id/levelCount"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/hiddenBossMsg"
-        android:layout_below="@+id/centerCount"
+        android:layout_below="@id/progressBar"
         android:layout_centerHorizontal="true" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/hiddenBossImg"
+        android:id="@+id/hiddenBossImg0"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:src="@drawable/nick0"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:src="@drawable/nick1"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView2"
+        android:src="@drawable/nick2"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Time"
+        android:id="@+id/timerText"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/levelCount"
+        android:layout_toEndOf="@+id/levelCount" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/hiddenBossImg3"
+        android:src="@drawable/nick3"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>
