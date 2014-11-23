@@ -3,9 +3,9 @@
     android:fromDegrees="270"
     android:toDegrees="270">
     <shape
-        android:innerRadiusRatio="2.5"
+        android:innerRadiusRatio="2.3"
         android:shape="ring"
-        android:thickness="1px">
+        android:thickness="10px">
         <gradient
             android:angle="0"
             android:endColor="#007DD6"
