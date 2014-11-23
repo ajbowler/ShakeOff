@@ -87,6 +87,7 @@ public class ShakeOff extends Activity {
             timerText.setText("Timer " + millis);
 
             if(bossFight){
+                bossTime += 100;
                 hiddenBossImg0.setVisibility(View.GONE);
                 hiddenBossImg1.setVisibility(View.GONE);
                 hiddenBossImg2.setVisibility(View.GONE);
