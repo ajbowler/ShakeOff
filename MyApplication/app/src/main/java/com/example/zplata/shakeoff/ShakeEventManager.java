@@ -26,7 +26,7 @@ public class ShakeEventManager implements SensorEventListener {
     }
 
     public interface OnShakeListener {
-        public void onShake(int count, int currentProgress);
+        public void onShake();
     }
 
     @Override
@@ -46,7 +46,7 @@ public class ShakeEventManager implements SensorEventListener {
                 final long now = System.currentTimeMillis();
                 mShakeTimestamp = now;
                 mShakeCount++;
-                mListener.onShake(mShakeCount, currentProgress);
+                mListener.onShake();
             }
         }
     }
