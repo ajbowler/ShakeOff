@@ -181,9 +181,9 @@ public class ShakeOff extends Activity {
 
     public void shake() {
 
-        if(level % 5 == 0 && level != 0 && bossFight) {
-            bossShake();
+        if(level % 5 == 0 && level != 0 && !bossFight) {
             bossFight = true;
+            bossShake();
         }
 
         if(!bossFight) { // because shakes is for leveling
