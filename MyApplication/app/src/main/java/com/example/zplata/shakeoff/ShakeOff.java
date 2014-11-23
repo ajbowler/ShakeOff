@@ -26,7 +26,6 @@ public class ShakeOff extends Activity {
     private TextView centerCount;
     private TextView levelCount;
     private TextView totalCount;
-    private TextView timerText;
     private RelativeLayout rLayout;
     private SensorManager sensorMgr;
     private Sensor mAccel;
@@ -73,7 +72,6 @@ public class ShakeOff extends Activity {
         public void run() {
 
             long millis = System.currentTimeMillis();
-            timerText.setText("Timer " + millis);
 
             hiddenBossImg0.setVisibility(View.GONE);
             hiddenBossImg1.setVisibility(View.GONE);
@@ -126,7 +124,6 @@ public class ShakeOff extends Activity {
         centerCount.bringToFront();
         levelCount = (TextView) findViewById(R.id.levelCount);
         totalCount = (TextView) findViewById(R.id.totalCount);
-        timerText = (TextView) findViewById(R.id.timerText);
         rLayout = (RelativeLayout) findViewById(R.id.rLayout);
         rLayout.setOnClickListener(rLayoutClickListener);
         levelProgressBar = (ProgressBar) findViewById(R.id.progressBar);
