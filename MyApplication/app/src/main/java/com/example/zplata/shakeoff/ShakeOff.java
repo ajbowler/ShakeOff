@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View.OnClickListener;
 import android.app.Activity;
 import java.util.Random;
+import android.os.Handler;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -51,6 +52,20 @@ public class ShakeOff extends Activity {
 
     //Boss Values
     private int tempShakes = 0;
+
+
+    // Timer
+    Handler timerHandler = new Handler();
+    Runnable timerRunnable = new Runnable() {
+
+        @Override
+        public void run() {
+            long millis = System.currentTimeMillis();
+            int seconds = (int) (millis / 1000);
+            timerHandler.postDelayed(this, 500);
+        }
+    };
+    // end Timer
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -185,4 +200,5 @@ public class ShakeOff extends Activity {
             shake(); //TODO take this out when it's almost done
         }
     };
+
 }
