@@ -35,6 +35,7 @@ public class ShakeOff extends Activity {
     private ImageView hiddenBossImg1;
     private ImageView hiddenBossImg2;
     private ImageView hiddenBossImg3;
+    private ImageView splash;
 
     private MediaPlayer mp;
 
@@ -54,14 +55,13 @@ public class ShakeOff extends Activity {
     private int maxTime = 15000; // 15 seconds to defeat Nick
     private boolean youWin = false;
 
+
+    private int splashTime = 4000;
+
     //Venmo Auth
     private String auth = "2146";
     private String amt = "0.01";
     private String dst = "HabitatForHumanity";
-
-
-
-
 
     // Timer
     // timerHandler.postDelayed(timerRunnable, 0); to start
@@ -73,6 +73,13 @@ public class ShakeOff extends Activity {
         public void run() {
 
             long millis = System.currentTimeMillis();
+
+            splashTime-= 100;
+            if(splashTime < 0) {
+                splash.setImageAlpha((int) (splash.getImageAlpha() * 0.8f));
+                if (splash.getImageAlpha() < 20)
+                    splash.setImageAlpha(0);
+            }
 
             hiddenBossImg0.setVisibility(View.GONE);
             hiddenBossImg1.setVisibility(View.GONE);
@@ -130,7 +137,7 @@ public class ShakeOff extends Activity {
 
         // Vars
         centerCount = (TextView) findViewById(R.id.centerCount);
-        centerCount.bringToFront();
+        //centerCount.bringToFront();
         levelCount = (TextView) findViewById(R.id.levelCount);
         totalCount = (TextView) findViewById(R.id.totalCount);
         rLayout = (RelativeLayout) findViewById(R.id.rLayout);
@@ -140,6 +147,9 @@ public class ShakeOff extends Activity {
         hiddenBossImg1 = (ImageView) findViewById(R.id.hiddenBossImg1);
         hiddenBossImg2 = (ImageView) findViewById(R.id.hiddenBossImg2);
         hiddenBossImg3 = (ImageView) findViewById(R.id.hiddenBossImg3);
+        splash = (ImageView) findViewById(R.id.splash);
+
+        splash.setImageAlpha(255);
 
         mp = MediaPlayer.create(getApplicationContext(), R.raw.tswift);
         mp.start();

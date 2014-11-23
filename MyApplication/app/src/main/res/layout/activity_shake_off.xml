@@ -7,19 +7,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".ShakeOff"
     android:id="@+id/rLayout"
-    android:background="#ffff0d0e">
+    android:background="#ff8c73ff">
 
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="0"
-        android:id="@+id/centerCount"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:textSize="100pt"
-        android:gravity="center" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -54,6 +43,27 @@
         android:layout_below="@+id/levelCount"
         android:layout_centerHorizontal="true" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Time"
+        android:id="@+id/timerText"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/levelCount"
+        android:layout_toEndOf="@+id/levelCount" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="0"
+        android:id="@+id/centerCount"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="100pt"
+        android:gravity="center" />
+
     <ImageView
         android:layout_width="400dp"
         android:layout_height="800dp"
@@ -78,16 +88,6 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Time"
-        android:id="@+id/timerText"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/levelCount"
-        android:layout_toEndOf="@+id/levelCount" />
-
     <ImageView
         android:layout_width="400dp"
         android:layout_height="800dp"
@@ -95,6 +95,15 @@
         android:src="@drawable/nick3"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="400dp"
+        android:layout_height="800dp"
+        android:id="@+id/splash"
+        android:src="@drawable/splash"
+        android:layout_above="@+id/timerText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 
 </RelativeLayout>
