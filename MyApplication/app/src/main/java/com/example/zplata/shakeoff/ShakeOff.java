@@ -21,6 +21,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.media.MediaPlayer;
+import android.content.Context;
+import android.content.Intent;
 
 import java.util.Random;
 
@@ -51,6 +53,11 @@ public class ShakeOff extends Activity {
 
     //Boss Values
     private int tempShakes = 0;
+    private boolean youWin = false;
+
+    //Venmo Auth
+    private String auth = "padD3bRMsJtbePcZ3QKd6V3WxYXs8EPa";
+    private String amt = "0.01";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,7 +132,7 @@ public class ShakeOff extends Activity {
         totalShakes++;
         totalCount.setText("Total " + totalShakes);
         int kShakes = level * levelRequirement;
-        if(tempShakes == kShakes) {
+        if(tempShakes >= kShakes) {
             tempShakes = 0;
             centerCount.setText("LEVEL UP");
             centerCount.setVisibility(View.VISIBLE);
@@ -133,12 +140,20 @@ public class ShakeOff extends Activity {
             levelCount.setText("Level " + level);
             hiddenBossMsg.setVisibility(View.GONE);
         }
+        else{
+            boolean venmoInstalled = VenmoLibrary.isVenmoInstalled(this);
+            if(venmoInstalled){
+               Intent venmoIntent = VenmoLibrary.openVenmoPayment(auth, "ShakeOff", "145434160922624933", amt, "Test", "charge");
+               startActivityForResult(venmoIntent, 1);
+            }
+        }
     }
 
     private void updateProgressBar() {
         levelProgressBar.setProgress(0);
         levelProgressBar.setMax(level * levelRequirement);
     }
+
 
 
     @Override
