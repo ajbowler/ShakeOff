@@ -60,21 +60,23 @@ public class ShakeOff extends Activity {
     //Boss Values
     private boolean bossFight; // is the boss fight happening
     private int tempShakes = 0;
-
+    private int image = 0;
+    private int kShakes;
+    private int bossTime; // milliseconds
+    private int maxTime = 15000; // 15 seconds to defeat Nick
     private boolean youWin = false;
 
     //Venmo Auth
     private String auth = "padD3bRMsJtbePcZ3QKd6V3WxYXs8EPa";
     private String amt = "0.10";
 
-    private int image = 0;
+
 
 
 
     // Timer
     // timerHandler.postDelayed(timerRunnable, 0); to start
-    // timerHandler.removeCallbacks(timerRunnable); to pause
-    long startTime;
+    // timerHandler.removeCallbacks(timerRunnable); to pause (not necessary)
     Handler timerHandler = new Handler();
     Runnable timerRunnable = new Runnable() {
 
@@ -99,12 +101,23 @@ public class ShakeOff extends Activity {
                     hiddenBossImg3.setVisibility(View.VISIBLE);
                 image++;
                 image%=4;
+
+                if(bossTime >= maxTime) {
+
+                    if(tempShakes >= kShakes) {
+                        centerCount.setText("LEVEL UP");
+                        centerCount.setVisibility(View.VISIBLE);
+                        level++;
+                        levelCount.setText("Level " + level);
+                        hiddenBossMsg.setVisibility(View.GONE);
+                    }
+                    bossFight = false;
+                }
             }
 
             timerHandler.postDelayed(this, 100); // calls itself in 10
         }
     };
-    // end Timer
 
 
     @Override
@@ -153,13 +166,7 @@ public class ShakeOff extends Activity {
             }
 
             public void handleShakeEvent() {
-                if(level % 5 == 0 && level != 0) {
-                    bossShake();
-                    bossFight = true;
-                }
-                else{
-                    shake();
-                }
+                shake();
             }
 
         });
@@ -167,12 +174,43 @@ public class ShakeOff extends Activity {
 
 
     public void shake() {
-        shakes++;
+
+        if(level % 5 == 0 && level != 0) {
+            bossShake();
+            bossFight = true;
+        }
+
+        if(!bossFight) { // because shakes is for leveling
+            shakes++;
+            levelProgressBar.incrementProgressBy(1);
+            if(shakes >= level * levelRequirement) {
+                shakes = 0;
+                centerCount.setText("LEVEL UP"); //TODO make a different text for this
+                level++;
+                levelCount.setText("Level " + level);
+                updateProgressBar();
+            }
+        }
+        else {
+            tempShakes++;
+        }
         totalShakes++;
-        levelProgressBar.incrementProgressBy(1);
         totalCount.setText("Total " + totalShakes);
         centerCount.setTextSize(222);
         centerCount.setText(shakes + "");
+
+    }
+
+    private void bossShake () {
+
+        tempShakes = 0;
+        bossTime = 0;
+        kShakes = level * levelRequirement;
+
+        centerCount.setVisibility(View.GONE);
+        hiddenBossMsg.setText("ShakeOff w/ Nicholas!");
+        hiddenBossMsg.setVisibility(View.VISIBLE);
+
         if(shakes >= level * levelRequirement) {
             shakes = 0;
             centerCount.setTextSize(80);
