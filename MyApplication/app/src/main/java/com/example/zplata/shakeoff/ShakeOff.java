@@ -187,7 +187,7 @@ public class ShakeOff extends Activity {
         centerCount.setVisibility(View.GONE);
         levelProgressBar.setVisibility(View.GONE);
 
-        hiddenBossMsg.setText("ShakeOff w/ Nicholas!");
+        hiddenBossMsg.setText("poop");
         hiddenBossMsg.setVisibility(View.VISIBLE);
         tempShakes++;
         totalShakes++;
