@@ -111,6 +111,9 @@ public class ShakeOff extends Activity {
                         levelCount.setText("Level " + level);
                         hiddenBossMsg.setVisibility(View.GONE);
                     }
+                    else {
+                        doVenmo();
+                    }
                     bossFight = false;
                 }
             }
@@ -210,44 +213,14 @@ public class ShakeOff extends Activity {
         centerCount.setVisibility(View.GONE);
         hiddenBossMsg.setText("ShakeOff w/ Nicholas!");
         hiddenBossMsg.setVisibility(View.VISIBLE);
-
-        if(shakes >= level * levelRequirement) {
-            shakes = 0;
-            centerCount.setTextSize(80);
-            centerCount.setText("LEVEL UP");
-            level++;
-            levelCount.setText("Level " + level);
-            updateProgressBar();
-        }
     }
 
-    private void bossShake () {
-        centerCount.setVisibility(View.GONE);
-        levelProgressBar.setVisibility(View.GONE);
-
-        hiddenBossMsg.setText("poop");
-        hiddenBossMsg.setVisibility(View.VISIBLE);
-        tempShakes++;
-        totalShakes++;
-        totalCount.setText("Total " + totalShakes);
-        int kShakes = level * levelRequirement;
-        if(tempShakes >= kShakes) {
-            tempShakes = 0;
-            centerCount.setTextSize(80);
-            centerCount.setText("LEVEL UP");
-            centerCount.setVisibility(View.VISIBLE);
-            level++;
-            levelCount.setText("Level " + level);
-            hiddenBossMsg.setVisibility(View.GONE);
-            levelProgressBar.setVisibility(View.VISIBLE);
-        }
-        /*else{
-            boolean venmoInstalled = VenmoLibrary.isVenmoInstalled(this);
-            if(venmoInstalled){
-               Intent venmoIntent = VenmoLibrary.openVenmoPayment(auth, "ShakeOff", "145434160922624933",
-                amt, "A message to accompany the payment.", "charge");
-               startActivityForResult(venmoIntent, 1);
-            }
+    private void doVenmo(){
+        /*boolean venmoInstalled = VenmoLibrary.isVenmoInstalled(this);
+        if(venmoInstalled){
+           Intent venmoIntent = VenmoLibrary.openVenmoPayment(auth, "ShakeOff", "145434160922624933",
+           amt, "A message to accompany the payment.", "charge");
+           startActivityForResult(venmoIntent, 1);
         }*/
     }
 
