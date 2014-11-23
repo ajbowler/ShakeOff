@@ -62,24 +62,24 @@
         android:layout_centerHorizontal="true" />
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="400dp"
+        android:layout_height="800dp"
         android:id="@+id/hiddenBossImg0"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:src="@drawable/nick0"/>
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="400dp"
+        android:layout_height="800dp"
         android:id="@+id/hiddenBossImg1"
         android:src="@drawable/nick1"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="400dp"
+        android:layout_height="800dp"
         android:id="@+id/hiddenBossImg2"
         android:src="@drawable/nick2"
         android:layout_centerVertical="true"
@@ -96,8 +96,8 @@
         android:layout_toEndOf="@+id/levelCount" />
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="400dp"
+        android:layout_height="800dp"
         android:id="@+id/hiddenBossImg3"
         android:src="@drawable/nick3"
         android:layout_centerVertical="true"
