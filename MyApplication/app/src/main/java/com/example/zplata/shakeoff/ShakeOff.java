@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.hardware.SensorEventListener;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.MenuItem;
@@ -83,7 +84,8 @@ public class ShakeOff extends Activity {
             }
 
             public void handleShakeEvent() {
-                if(level % 5 == 0 && level != 0){
+                if(level % 5 == 0 && level != 0) {
+                    Log.d("HI", "MESSING");
                     bossShake();
                 }
                 else{
@@ -96,6 +98,7 @@ public class ShakeOff extends Activity {
 
 
     public void shake() {
+        Toast.makeText(this, "I CANT EVEN." + level, Toast.LENGTH_SHORT).show();
         shakes++;
         totalShakes++;
         levelProgressBar.incrementProgressBy(1);
@@ -114,7 +117,7 @@ public class ShakeOff extends Activity {
         Toast.makeText(this, "I CANT EVEN.", Toast.LENGTH_SHORT).show();
         centerCount.setVisibility(View.GONE);
         hiddenBossMsg.setText("ShakeOff w/ Nicholas!");
-        //hiddenBossMsg.setVisibility(View.VISIBLE);
+        hiddenBossMsg.setVisibility(View.VISIBLE);
         tempShakes++;
         totalShakes++;
         totalCount.setText("Total " + totalShakes);
