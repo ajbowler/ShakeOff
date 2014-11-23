@@ -11,8 +11,6 @@ import android.app.Activity;
 import java.util.Random;
 import android.os.Handler;
 import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -20,10 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.media.MediaPlayer;
-import android.content.Context;
 import android.content.Intent;
-
-import java.util.Random;
 
 @TargetApi(17)
 public class ShakeOff extends Activity {
@@ -41,8 +36,6 @@ public class ShakeOff extends Activity {
     private ImageView hiddenBossImg1;
     private ImageView hiddenBossImg2;
     private ImageView hiddenBossImg3;
-    private int currentProgress;
-    private int maxProgress;
 
     private MediaPlayer mp;
 
