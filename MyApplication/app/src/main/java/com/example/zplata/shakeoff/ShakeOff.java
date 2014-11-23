@@ -26,6 +26,8 @@ import java.util.Random;
 public class ShakeOff extends Activity {
 
     private TextView centerCount;
+    private TextView levelCount;
+    private TextView totalCount;
     private RelativeLayout rLayout;
     private SensorManager sensorMgr;
     private Sensor mAccel;
@@ -51,6 +53,8 @@ public class ShakeOff extends Activity {
 
         // Vars
         centerCount = (TextView) findViewById(R.id.centerCount);
+        levelCount = (TextView) findViewById(R.id.levelCount);
+        totalCount = (TextView) findViewById(R.id.totalCount);
         rLayout = (RelativeLayout) findViewById(R.id.rLayout);
         rLayout.setOnClickListener(rLayoutClickListener);
 
@@ -69,7 +73,7 @@ public class ShakeOff extends Activity {
                 handleShakeEvent(count, currentProgress);
             }
 
-            public void handleShakeEvent(int count) { totalShakes = count; shake(); }
+            public void handleShakeEvent(int count) { /*totalShakes = count; shake increases totalShakes by 1 anyway*/shake(); }
 
 
             public void handleShakeEvent(int count, int currentProgress) {
@@ -82,11 +86,14 @@ public class ShakeOff extends Activity {
 
     public void shake() {
         shakes++;
+        totalShakes++;
+        totalCount.setText("Total " + totalShakes);
         centerCount.setText(shakes + "");
         if(shakes >= level * levelRequirement) {
             shakes = 0;
+            centerCount.setText("LEVEL UP"); //TODO make a different text for this
             level++;
-
+            levelCount.setText("Level " + level);
         }
 
     }
@@ -134,6 +141,7 @@ public class ShakeOff extends Activity {
     private OnClickListener rLayoutClickListener = new OnClickListener() {
         public void onClick(View v) {
             v.setBackgroundColor(random.nextInt());
+            shake(); //TODO take this out when it's almost done
         }
     };
 }
