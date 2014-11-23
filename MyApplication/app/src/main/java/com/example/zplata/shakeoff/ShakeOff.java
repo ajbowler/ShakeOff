@@ -65,7 +65,7 @@ public class ShakeOff extends Activity {
 
     //Venmo Auth
     private String auth = "padD3bRMsJtbePcZ3QKd6V3WxYXs8EPa";
-    private String amt = "0.01";
+    private String amt = "0.10";
 
     private int image = 0;
 
@@ -203,11 +203,40 @@ public class ShakeOff extends Activity {
             hiddenBossMsg.setVisibility(View.GONE);
             levelProgressBar.setVisibility(View.VISIBLE);
         }
-        else{
+        /*else{
             boolean venmoInstalled = VenmoLibrary.isVenmoInstalled(this);
             if(venmoInstalled){
-               Intent venmoIntent = VenmoLibrary.openVenmoPayment(auth, "ShakeOff", "145434160922624933", amt, "Test", "charge");
+               Intent venmoIntent = VenmoLibrary.openVenmoPayment(auth, "ShakeOff", "145434160922624933",
+                amt, "A message to accompany the payment.", "charge");
                startActivityForResult(venmoIntent, 1);
+            }
+        }*/
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch(requestCode) {
+            case 1: {
+                if(resultCode == RESULT_OK) {
+                    String signedRequest = data.getStringExtra("signedextra");
+                    if(signedRequest != null) {
+                        VenmoLibrary.VenmoResponse response = (new VenmoLibrary())
+                                .validateVenmoPaymentResponse(signedRequest, "secret");
+                        if(response.getSuccess().equals("1")) {
+                            // Payment Successful
+                            String note = response.getNote();
+                            String amount = response.getAmount();
+                        }
+                    }
+                    else{
+                        String error_message = data.getStringExtra("error_message");
+                    }
+                }
+                else if(resultCode == RESULT_CANCELED){
+                    // user cancelled payment
+                    Toast.makeText(this,"VENMO CANCELLED PAYMENT", Toast.LENGTH_SHORT).show();
+                }
+                break;
             }
         }
     }
@@ -216,7 +245,6 @@ public class ShakeOff extends Activity {
         levelProgressBar.setProgress(0);
         levelProgressBar.setMax(level * levelRequirement);
     }
-
 
 
     @Override
