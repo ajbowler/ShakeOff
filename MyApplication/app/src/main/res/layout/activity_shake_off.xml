@@ -21,14 +21,17 @@
         android:textSize="100pt" />
 
     <ProgressBar
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/progressBar"
-        android:indeterminate="false"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"/>
-        <!---->android:progressDrawable="@drawable/circular_progress_bar"/>
+        android:layout_centerHorizontal="true"
+        android:indeterminate="false"
+        android:progressDrawable="@drawable/circular_progress_bar"
+        android:background="@drawable/circle_shape"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:max="100"
+        android:progress="32"/>
 
     <TextView
         android:layout_width="wrap_content"

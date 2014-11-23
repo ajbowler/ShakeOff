@@ -53,6 +53,7 @@ public class ShakeOff extends Activity {
 
         // Vars
         centerCount = (TextView) findViewById(R.id.centerCount);
+        centerCount.bringToFront();
         levelCount = (TextView) findViewById(R.id.levelCount);
         totalCount = (TextView) findViewById(R.id.totalCount);
         rLayout = (RelativeLayout) findViewById(R.id.rLayout);

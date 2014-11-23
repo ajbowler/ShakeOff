@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--Created by Andrew Bowler
-11/22/2014-->
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-<item android:id="@+id/progress">
+<rotate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fromDegrees="270"
+    android:toDegrees="270">
     <shape
-        android:innerRadiusRatio="5"
-        android:innerRadius="275px"
+        android:innerRadiusRatio="2.5"
         android:shape="ring"
-        android:thicknessRatio="7">
+        android:thickness="1px">
         <gradient
-            android:startColor="#ff0000"
-            android:endColor="#0000ff"
-            android:centerColor="#ff00ff"
-            android:type="sweep" />
+            android:angle="0"
+            android:endColor="#007DD6"
+            android:startColor="#007DD6"
+            android:type="sweep"
+            android:useLevel="false" />
     </shape>
-</item>
-</layer-list>
+</rotate>
