@@ -5,6 +5,7 @@ import android.hardware.SensorEventListener;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.View;
 import android.view.MenuItem;
@@ -67,7 +68,7 @@ public class ShakeOff extends Activity {
 
     //Venmo Auth
     private String auth = "padD3bRMsJtbePcZ3QKd6V3WxYXs8EPa";
-    private String amt = "0.01";
+    private String amt = "0.10";
 
 
 
@@ -195,7 +196,9 @@ public class ShakeOff extends Activity {
         }
         totalShakes++;
         totalCount.setText("Total " + totalShakes);
+        centerCount.setTextSize(222);
         centerCount.setText(shakes + "");
+
     }
 
     private void bossShake () {
@@ -208,20 +211,78 @@ public class ShakeOff extends Activity {
         hiddenBossMsg.setText("ShakeOff w/ Nicholas!");
         hiddenBossMsg.setVisibility(View.VISIBLE);
 
+        if(shakes >= level * levelRequirement) {
+            shakes = 0;
+            centerCount.setTextSize(80);
+            centerCount.setText("LEVEL UP");
+            level++;
+            levelCount.setText("Level " + level);
+            updateProgressBar();
+        }
+    }
+
+    private void bossShake () {
+        centerCount.setVisibility(View.GONE);
+        levelProgressBar.setVisibility(View.GONE);
+
+        hiddenBossMsg.setText("poop");
+        hiddenBossMsg.setVisibility(View.VISIBLE);
+        tempShakes++;
+        totalShakes++;
+        totalCount.setText("Total " + totalShakes);
+        int kShakes = level * levelRequirement;
+        if(tempShakes >= kShakes) {
+            tempShakes = 0;
+            centerCount.setTextSize(80);
+            centerCount.setText("LEVEL UP");
+            centerCount.setVisibility(View.VISIBLE);
+            level++;
+            levelCount.setText("Level " + level);
+            hiddenBossMsg.setVisibility(View.GONE);
+            levelProgressBar.setVisibility(View.VISIBLE);
+        }
         /*else{
             boolean venmoInstalled = VenmoLibrary.isVenmoInstalled(this);
             if(venmoInstalled){
-               Intent venmoIntent = VenmoLibrary.openVenmoPayment(auth, "ShakeOff", "145434160922624933", amt, "Test", "charge");
+               Intent venmoIntent = VenmoLibrary.openVenmoPayment(auth, "ShakeOff", "145434160922624933",
+                amt, "A message to accompany the payment.", "charge");
                startActivityForResult(venmoIntent, 1);
             }
         }*/
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch(requestCode) {
+            case 1: {
+                if(resultCode == RESULT_OK) {
+                    String signedRequest = data.getStringExtra("signedextra");
+                    if(signedRequest != null) {
+                        VenmoLibrary.VenmoResponse response = (new VenmoLibrary())
+                                .validateVenmoPaymentResponse(signedRequest, "secret");
+                        if(response.getSuccess().equals("1")) {
+                            // Payment Successful
+                            String note = response.getNote();
+                            String amount = response.getAmount();
+                        }
+                    }
+                    else{
+                        String error_message = data.getStringExtra("error_message");
+                    }
+                }
+                else if(resultCode == RESULT_CANCELED){
+                    // user cancelled payment
+                    Toast.makeText(this,"VENMO CANCELLED PAYMENT", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            }
+        }
     }
 
     private void updateProgressBar() {
         levelProgressBar.setProgress(0);
         levelProgressBar.setMax(level * levelRequirement);
     }
-
 
 
     @Override
