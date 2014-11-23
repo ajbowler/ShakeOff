@@ -64,10 +64,26 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/hiddenBossImg"
+        android:id="@+id/hiddenBossImg0"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:src="@drawable/nick0"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:src="@drawable/nick1"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView2"
+        android:src="@drawable/nick2"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -78,6 +94,14 @@
         android:layout_alignParentBottom="true"
         android:layout_toRightOf="@+id/levelCount"
         android:layout_toEndOf="@+id/levelCount" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/hiddenBossImg3"
+        android:src="@drawable/nick3"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>

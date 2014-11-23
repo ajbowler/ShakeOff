@@ -38,7 +38,10 @@ public class ShakeOff extends Activity {
     private Sensor mAccel;
     private Random random;
     private ProgressBar levelProgressBar;
-    private ImageView hiddenBossImg;
+    private ImageView hiddenBossImg0;
+    private ImageView hiddenBossImg1;
+    private ImageView hiddenBossImg2;
+    private ImageView hiddenBossImg3;
     private int currentProgress;
     private int maxProgress;
 
@@ -52,7 +55,10 @@ public class ShakeOff extends Activity {
     public int levelRequirement = 5;
 
     //Boss Values
+    private boolean bossFight; // is the boss fight happening
     private int tempShakes = 0;
+    private int image = 0;
+
 
 
     // Timer
@@ -68,7 +74,22 @@ public class ShakeOff extends Activity {
             long millis = System.currentTimeMillis();
             timerText.setText("Timer " + millis);
 
-            shake();
+            if(bossFight){
+                hiddenBossImg0.setVisibility(View.GONE);
+                hiddenBossImg1.setVisibility(View.GONE);
+                hiddenBossImg2.setVisibility(View.GONE);
+                hiddenBossImg3.setVisibility(View.GONE);
+                if(image == 0)
+                    hiddenBossImg0.setVisibility(View.VISIBLE);
+                if(image == 1)
+                    hiddenBossImg1.setVisibility(View.VISIBLE);
+                if(image == 2)
+                    hiddenBossImg2.setVisibility(View.VISIBLE);
+                if(image == 3)
+                    hiddenBossImg3.setVisibility(View.VISIBLE);
+                image++;
+                image%=4;
+            }
 
             timerHandler.postDelayed(this, 100); // calls itself in 10
         }
@@ -90,7 +111,10 @@ public class ShakeOff extends Activity {
         rLayout = (RelativeLayout) findViewById(R.id.rLayout);
         rLayout.setOnClickListener(rLayoutClickListener);
         levelProgressBar = (ProgressBar) findViewById(R.id.progressBar);
-        hiddenBossImg = (ImageView) findViewById(R.id.hiddenBossImg);
+        hiddenBossImg0 = (ImageView) findViewById(R.id.hiddenBossImg0);
+        hiddenBossImg1 = (ImageView) findViewById(R.id.hiddenBossImg1);
+        hiddenBossImg2 = (ImageView) findViewById(R.id.hiddenBossImg2);
+        hiddenBossImg3 = (ImageView) findViewById(R.id.hiddenBossImg3);
 
         mp = MediaPlayer.create(getApplicationContext(), R.raw.tswift);
         mp.start();
@@ -100,7 +124,10 @@ public class ShakeOff extends Activity {
         levelProgressBar.setProgress(0);
         levelProgressBar.setMax(level * levelRequirement);
 
-        hiddenBossImg.setVisibility(View.GONE);
+        hiddenBossImg0.setVisibility(View.GONE);
+        hiddenBossImg1.setVisibility(View.GONE);
+        hiddenBossImg2.setVisibility(View.GONE);
+        hiddenBossImg3.setVisibility(View.GONE);
 
         timerHandler.postDelayed(timerRunnable, 0);
 
@@ -117,6 +144,7 @@ public class ShakeOff extends Activity {
             public void handleShakeEvent() {
                 if(level % 5 == 0 && level != 0) {
                     bossShake();
+                    bossFight = true;
                 }
                 else{
                     shake();
@@ -144,7 +172,7 @@ public class ShakeOff extends Activity {
 
     private void bossShake () {
         centerCount.setVisibility(View.GONE);
-        hiddenBossImg.setVisibility(View.VISIBLE);
+
         hiddenBossMsg.setText("ShakeOff w/ Nicholas!");
         hiddenBossMsg.setVisibility(View.VISIBLE);
         tempShakes++;
