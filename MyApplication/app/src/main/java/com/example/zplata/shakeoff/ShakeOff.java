@@ -86,12 +86,14 @@ public class ShakeOff extends Activity {
             long millis = System.currentTimeMillis();
             timerText.setText("Timer " + millis);
 
+            hiddenBossImg0.setVisibility(View.GONE);
+            hiddenBossImg1.setVisibility(View.GONE);
+            hiddenBossImg2.setVisibility(View.GONE);
+            hiddenBossImg3.setVisibility(View.GONE);
+
             if(bossFight){
                 bossTime += 100;
-                hiddenBossImg0.setVisibility(View.GONE);
-                hiddenBossImg1.setVisibility(View.GONE);
-                hiddenBossImg2.setVisibility(View.GONE);
-                hiddenBossImg3.setVisibility(View.GONE);
+
                 if(image == 0)
                     hiddenBossImg0.setVisibility(View.VISIBLE);
                 if(image == 1)
@@ -179,7 +181,7 @@ public class ShakeOff extends Activity {
 
     public void shake() {
 
-        if(level % 5 == 0 && level != 0) {
+        if(level % 5 == 0 && level != 0 && bossFight) {
             bossShake();
             bossFight = true;
         }
