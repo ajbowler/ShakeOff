@@ -53,14 +53,6 @@
         android:layout_below="@+id/levelCount"
         android:layout_centerHorizontal="true" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/hiddenBossMsg"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
-
     <ImageView
         android:layout_width="400dp"
         android:layout_height="800dp"

@@ -35,7 +35,6 @@ public class ShakeOff extends Activity {
     private TextView centerCount;
     private TextView levelCount;
     private TextView totalCount;
-    private TextView hiddenBossMsg;
     private TextView timerText;
     private RelativeLayout rLayout;
     private SensorManager sensorMgr;
@@ -115,7 +114,7 @@ public class ShakeOff extends Activity {
                         levelCount.setText("Level " + level);
                         mp = MediaPlayer.create(getApplicationContext(), R.raw.poke);
                         mp.start();
-                        hiddenBossMsg.setVisibility(View.GONE);
+                        levelProgressBar.setVisibility(View.VISIBLE);
                     }
                     else {
                         doVenmo();
@@ -140,7 +139,6 @@ public class ShakeOff extends Activity {
         levelCount = (TextView) findViewById(R.id.levelCount);
         totalCount = (TextView) findViewById(R.id.totalCount);
         timerText = (TextView) findViewById(R.id.timerText);
-        hiddenBossMsg = (TextView) findViewById(R.id.hiddenBossMsg);
         rLayout = (RelativeLayout) findViewById(R.id.rLayout);
         rLayout.setOnClickListener(rLayoutClickListener);
         levelProgressBar = (ProgressBar) findViewById(R.id.progressBar);
@@ -220,18 +218,16 @@ public class ShakeOff extends Activity {
     }
 
     private void bossShake () {
+        levelProgressBar.setVisibility(View.GONE);
 
         tempShakes = 0;
         bossTime = 0;
         kShakes = 20+level;
 
         centerCount.setVisibility(View.GONE);
-        hiddenBossMsg.setText("ShakeOff w/ Nicholas!");
-        hiddenBossMsg.setVisibility(View.VISIBLE);
     }
 
     private void doVenmo(){
-        hiddenBossMsg.setText("You lose");
         /*boolean venmoInstalled = VenmoLibrary.isVenmoInstalled(this);
         if(venmoInstalled){
            Intent venmoIntent = VenmoLibrary.openVenmoPayment(auth, "ShakeOff", "145434160922624933",
