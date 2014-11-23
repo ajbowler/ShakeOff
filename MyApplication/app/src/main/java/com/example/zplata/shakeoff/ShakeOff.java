@@ -15,6 +15,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -35,6 +36,7 @@ public class ShakeOff extends Activity {
     private Sensor mAccel;
     private Random random;
     private ProgressBar levelProgressBar;
+    private ImageView hiddenBossImg;
     private int currentProgress;
     private int maxProgress;
 
@@ -64,6 +66,7 @@ public class ShakeOff extends Activity {
         rLayout = (RelativeLayout) findViewById(R.id.rLayout);
         rLayout.setOnClickListener(rLayoutClickListener);
         levelProgressBar = (ProgressBar) findViewById(R.id.progressBar);
+        hiddenBossImg = (ImageView) findViewById(R.id.hiddenBossImg);
 
         mp = MediaPlayer.create(getApplicationContext(), R.raw.tswift);
         mp.start();
@@ -72,6 +75,8 @@ public class ShakeOff extends Activity {
 
         levelProgressBar.setProgress(0);
         levelProgressBar.setMax(level * levelRequirement);
+
+        hiddenBossImg.setVisibility(View.GONE);
 
 
         sensorMgr = (SensorManager) getSystemService(SENSOR_SERVICE);
@@ -98,7 +103,6 @@ public class ShakeOff extends Activity {
 
 
     public void shake() {
-        Toast.makeText(this, "I CANT EVEN." + level, Toast.LENGTH_SHORT).show();
         shakes++;
         totalShakes++;
         levelProgressBar.incrementProgressBy(1);
@@ -114,8 +118,8 @@ public class ShakeOff extends Activity {
     }
 
     private void bossShake () {
-        Toast.makeText(this, "I CANT EVEN.", Toast.LENGTH_SHORT).show();
         centerCount.setVisibility(View.GONE);
+        hiddenBossImg.setVisibility(View.VISIBLE);
         hiddenBossMsg.setText("ShakeOff w/ Nicholas!");
         hiddenBossMsg.setVisibility(View.VISIBLE);
         tempShakes++;

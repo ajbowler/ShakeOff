@@ -60,4 +60,13 @@
         android:layout_below="@+id/centerCount"
         android:layout_centerHorizontal="true" />
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/hiddenBossImg"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/nick0"/>
+
+
 </RelativeLayout>
