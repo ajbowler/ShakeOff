@@ -55,8 +55,9 @@ public class ShakeOff extends Activity {
     private boolean youWin = false;
 
     //Venmo Auth
-    private String auth = "padD3bRMsJtbePcZ3QKd6V3WxYXs8EPa";
-    private String amt = "0.10";
+    private String auth = "2146";
+    private String amt = "0.01";
+    private String dst = "HabitatForHumanity";
 
 
 
@@ -92,6 +93,8 @@ public class ShakeOff extends Activity {
                 image++;
                 image%=4;
 
+                rLayout.setBackgroundColor(random.nextInt());
+
                 if(bossTime >= maxTime || tempShakes >= kShakes) {
 
                     if(tempShakes >= kShakes) {
@@ -104,6 +107,12 @@ public class ShakeOff extends Activity {
                     }
                     else {
                         doVenmo();
+                        level = 1;
+                        shakes = 0;
+                        totalShakes = 0;
+                        centerCount.setVisibility(View.VISIBLE);
+                        levelCount.setText("Level " + level);
+                        totalCount.setText("Total " + totalShakes);
                     }
                     bossFight = false;
                 }
@@ -213,13 +222,13 @@ public class ShakeOff extends Activity {
     }
 
     private void doVenmo(){
-        /*boolean venmoInstalled = VenmoLibrary.isVenmoInstalled(this);
+        boolean venmoInstalled = VenmoLibrary.isVenmoInstalled(this);
         if(venmoInstalled){
-           Intent venmoIntent = VenmoLibrary.openVenmoPayment(auth, "ShakeOff", "145434160922624933",
-           amt, "A message to accompany the payment.", "charge");
+           Intent venmoIntent = VenmoLibrary.openVenmoPayment(auth, "ShakeOff", "cassidoo",
+           amt, "A message to accompany the payment.", "pay");
            startActivityForResult(venmoIntent, 1);
-        }*/
-        Toast.makeText(this, "YOU DONE", Toast.LENGTH_SHORT).show();
+        }
+        Toast.makeText(this, "HEY YOU LOSE.", Toast.LENGTH_SHORT);
     }
 
     @Override
@@ -230,7 +239,7 @@ public class ShakeOff extends Activity {
                     String signedRequest = data.getStringExtra("signedextra");
                     if(signedRequest != null) {
                         VenmoLibrary.VenmoResponse response = (new VenmoLibrary())
-                                .validateVenmoPaymentResponse(signedRequest, "secret");
+                                .validateVenmoPaymentResponse(signedRequest, "EUWjg4uuGdSRK3sWZbyDtGxARENdQDs7");
                         if(response.getSuccess().equals("1")) {
                             // Payment Successful
                             String note = response.getNote();
