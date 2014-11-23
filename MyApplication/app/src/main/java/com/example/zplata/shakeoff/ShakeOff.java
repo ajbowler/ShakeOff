@@ -217,6 +217,7 @@ public class ShakeOff extends Activity {
     }
 
     private void doVenmo(){
+        hiddenBossMsg.setText("You lose");
         /*boolean venmoInstalled = VenmoLibrary.isVenmoInstalled(this);
         if(venmoInstalled){
            Intent venmoIntent = VenmoLibrary.openVenmoPayment(auth, "ShakeOff", "145434160922624933",
