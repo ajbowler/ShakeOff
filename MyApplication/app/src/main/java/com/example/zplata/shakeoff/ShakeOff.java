@@ -73,11 +73,10 @@ public class ShakeOff extends Activity {
                 handleShakeEvent(count, currentProgress);
             }
 
-            public void handleShakeEvent(int count) { /*totalShakes = count; shake increases totalShakes by 1 anyway*/shake(); }
-
+            //public void handleShakeEvent(int count) { // I forget what was here but i dont think we need it
 
             public void handleShakeEvent(int count, int currentProgress) {
-                centerCount.setText(count + "");
+                shake();
             }
 
         });
