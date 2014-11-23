@@ -1,5 +1,6 @@
 package com.example.zplata.shakeoff;
 
+import android.annotation.TargetApi;
 import android.graphics.Color;
 import android.hardware.SensorEventListener;
 import android.support.v7.app.ActionBarActivity;
@@ -28,7 +29,7 @@ import android.content.Intent;
 
 import java.util.Random;
 
-
+@TargetApi(17)
 public class ShakeOff extends Activity {
 
     private TextView centerCount;
