@@ -32,6 +32,7 @@ public class ShakeOff extends Activity {
     private TextView levelCount;
     private TextView totalCount;
     private TextView hiddenBossMsg;
+    private TextView timerText;
     private RelativeLayout rLayout;
     private SensorManager sensorMgr;
     private Sensor mAccel;
@@ -55,14 +56,21 @@ public class ShakeOff extends Activity {
 
 
     // Timer
+    // timerHandler.postDelayed(timerRunnable, 0); to start
+    // timerHandler.removeCallbacks(timerRunnable); to pause
+    long startTime;
     Handler timerHandler = new Handler();
     Runnable timerRunnable = new Runnable() {
 
         @Override
         public void run() {
+
             long millis = System.currentTimeMillis();
-            int seconds = (int) (millis / 1000);
-            timerHandler.postDelayed(this, 500);
+            timerText.setText("Timer " + millis);
+
+            shake();
+
+            timerHandler.postDelayed(this, 100); // calls itself in 10
         }
     };
     // end Timer
@@ -77,6 +85,7 @@ public class ShakeOff extends Activity {
         centerCount.bringToFront();
         levelCount = (TextView) findViewById(R.id.levelCount);
         totalCount = (TextView) findViewById(R.id.totalCount);
+        timerText = (TextView) findViewById(R.id.timerText);
         hiddenBossMsg = (TextView) findViewById(R.id.hiddenBossMsg);
         rLayout = (RelativeLayout) findViewById(R.id.rLayout);
         rLayout.setOnClickListener(rLayoutClickListener);
@@ -92,6 +101,8 @@ public class ShakeOff extends Activity {
         levelProgressBar.setMax(level * levelRequirement);
 
         hiddenBossImg.setVisibility(View.GONE);
+
+        timerHandler.postDelayed(timerRunnable, 0);
 
 
         sensorMgr = (SensorManager) getSystemService(SENSOR_SERVICE);
