@@ -119,7 +119,7 @@ public class ShakeOff extends Activity {
                 }
             }
 
-            timerHandler.postDelayed(this, 100); // calls itself in 10
+            timerHandler.postDelayed(this, 100); // calls itself in 100
         }
     };
 
@@ -209,7 +209,7 @@ public class ShakeOff extends Activity {
 
         tempShakes = 0;
         bossTime = 0;
-        kShakes = level * levelRequirement;
+        kShakes = 20+level;
 
         centerCount.setVisibility(View.GONE);
         hiddenBossMsg.setText("ShakeOff w/ Nicholas!");
