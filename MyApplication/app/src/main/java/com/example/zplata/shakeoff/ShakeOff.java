@@ -112,6 +112,8 @@ public class ShakeOff extends Activity {
                         centerCount.setVisibility(View.VISIBLE);
                         level++;
                         levelCount.setText("Level " + level);
+                        mp = MediaPlayer.create(getApplicationContext(), R.raw.poke);
+                        mp.start();
                         hiddenBossMsg.setVisibility(View.GONE);
                     }
                     else {
@@ -203,6 +205,8 @@ public class ShakeOff extends Activity {
                 centerCount.setText("LEVEL UP"); //TODO make a different text for this
                 level++;
                 levelCount.setText("Level " + level);
+                mp = MediaPlayer.create(getApplicationContext(), R.raw.poke);
+                mp.start();
                 updateProgressBar();
             }
         }
@@ -233,6 +237,7 @@ public class ShakeOff extends Activity {
            amt, "A message to accompany the payment.", "charge");
            startActivityForResult(venmoIntent, 1);
         }*/
+        Toast.makeText(this, "YOU DONE", Toast.LENGTH_SHORT).show();
     }
 
     @Override
