@@ -90,7 +90,6 @@ public class ShakeOff extends Activity {
 
             public void handleShakeEvent() {
                 if(level % 5 == 0 && level != 0) {
-                    Log.d("HI", "MESSING");
                     bossShake();
                 }
                 else{
@@ -125,7 +124,7 @@ public class ShakeOff extends Activity {
         tempShakes++;
         totalShakes++;
         totalCount.setText("Total " + totalShakes);
-        int kShakes = level * levelRequirement + 3;
+        int kShakes = level * levelRequirement;
         if(tempShakes == kShakes) {
             tempShakes = 0;
             centerCount.setText("LEVEL UP");
